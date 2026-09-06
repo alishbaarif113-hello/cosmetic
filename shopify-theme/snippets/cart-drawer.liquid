@@ -1,0 +1,63 @@
+<div class="cart-drawer-overlay" id="ShopifyCartDrawerOverlay">
+  <div class="cart-drawer">
+    <div class="drawer-header">
+      <h3 class="drawer-title">Your Bag (<span class="cart-badge">{{ cart.item_count }}</span>)</h3>
+      <button class="btn-close-drawer" onclick="document.getElementById('ShopifyCartDrawerOverlay').classList.remove('open')">✕</button>
+    </div>
+
+    <div class="shipping-meter-box">
+      <div class="shipping-meter-text">
+        {%- assign threshold = 5000 -%}
+        {%- if cart.total_price >= threshold -%}
+          🎉 <strong>Congratulations!</strong> You unlocked FREE Shipping!
+        {%- else -%}
+          {%- assign remaining = threshold | minus: cart.total_price -%}
+          Add <strong>{{ remaining | money }}</strong> more for <strong>FREE SHIPPING!</strong>
+        {%- endif -%}
+      </div>
+      <div class="shipping-progress-bar">
+        {%- assign percent = cart.total_price | times: 100 | divided_by: threshold -%}
+        <div class="shipping-progress-fill" style="width: {% if percent > 100 %}100{% else %}{{ percent }}{% endif %}%;"></div>
+      </div>
+    </div>
+
+    <div class="drawer-body">
+      {%- if cart.item_count == 0 -%}
+        <div class="cart-empty-state">
+          <p>Your bag is currently empty.</p>
+          <a href="{{ routes.all_products_collection_url }}" class="btn-primary" style="margin-top: 16px;">Continue Shopping</a>
+        </div>
+      {%- else -%}
+        {%- for item in cart.items -%}
+          <div class="cart-item-row">
+            <img src="{{ item.image | image_url: width: 120 }}" alt="{{ item.title }}" class="cart-item-img">
+            <div class="cart-item-details">
+              <h4 class="cart-item-title">{{ item.product.title }}</h4>
+              {%- unless item.product.has_only_default_variant -%}
+                <span class="cart-item-variant">{{ item.variant.title }}</span>
+              {%- endunless -%}
+              <div class="cart-item-controls">
+                <span class="qty-val">Qty: {{ item.quantity }}</span>
+                <span class="cart-item-price">{{ item.final_line_price | money }}</span>
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if cart.item_count > 0 -%}
+      <div class="drawer-footer">
+        <div class="cart-summary-line">
+          <span>Subtotal</span>
+          <span>{{ cart.total_price | money }}</span>
+        </div>
+        <div class="cart-summary-total">
+          <span>Total</span>
+          <span>{{ cart.total_price | money }}</span>
+        </div>
+        <a href="/checkout" class="btn-checkout" style="display: block; text-align: center;">Proceed to Checkout</a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>

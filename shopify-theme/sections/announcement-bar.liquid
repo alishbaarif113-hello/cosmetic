@@ -1,0 +1,29 @@
+<div class="announcement-bar" style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};">
+  <span>{{ section.settings.text }}</span>
+</div>
+
+{% schema %}
+{
+  "name": "Announcement Bar",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement Text",
+      "default": "FREE SHIPPING ON ORDERS OVER $50 | USE CODE: GLOW20"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#C87D70"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LUMIÈRE COSMETICS | Luxury Botanical Skincare & Beauty</title>
+  <meta name="description" content="Reveal your natural beauty with Lumière Cosmetics. Premium botanical skincare crafted with natural ingredients for healthy, radiant glowing skin." />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>" />
+
+  <!-- Google Fonts & Stylesheet -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar" id="topAnnouncement">
+    <span id="announcementText">FREE SHIPPING ON ORDERS OVER $50 | USE CODE: <strong>GLOW20</strong></span>
+    <button class="admin-badge" onclick="app.openAdminModal('customizer')">
+      <span>⚙️ Edit Store</span>
+    </button>
+  </div>
+
+  <!-- Global Sticky Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <!-- Logo -->
+      <a class="brand-logo" onclick="app.showHome()">
+        <span class="logo-title">LUMIÈRE</span>
+        <span class="logo-subtitle">COSMETICS</span>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="main-nav" aria-label="Main Navigation">
+        <a class="nav-link active" data-view="home" onclick="app.showHome()">HOME</a>
+        <a class="nav-link" data-view="shop" onclick="app.showCatalog('All')">SHOP</a>
+        <a class="nav-link" data-cat="Skin Care" onclick="app.showCatalog('Skin Care')">SKIN CARE</a>
+        <a class="nav-link" data-cat="Makeup" onclick="app.showCatalog('Makeup')">MAKEUP</a>
+        <a class="nav-link" data-cat="Hair Care" onclick="app.showCatalog('Hair Care')">HAIR CARE</a>
+        <a class="nav-link" data-view="about" onclick="document.getElementById('brandStorySection').scrollIntoView({behavior: 'smooth'})">ABOUT US</a>
+        <a class="nav-link" data-view="blog" onclick="app.showToast('Blog section is live on your Shopify theme!')">BLOG</a>
+        <a class="nav-link" data-view="contact" onclick="document.getElementById('footerContact').scrollIntoView({behavior: 'smooth'})">CONTACT US</a>
+      </nav>
+
+      <!-- Header Action Icons -->
+      <div class="header-actions">
+        <!-- Live Instant Search Bar Input -->
+        <div style="position: relative; display: flex; align-items: center;">
+          <input type="text" id="searchInput" placeholder="Search products..." style="padding: 6px 12px 6px 28px; border: 1px solid var(--color-border); border-radius: var(--radius-pill); font-size: 0.75rem; width: 140px; transition: width 0.3s ease;" onfocus="this.style.width='200px'" onblur="if(!this.value) this.style.width='140px'" />
+          <svg style="position: absolute; left: 8px; width: 14px; height: 14px; color: var(--color-text-muted);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+
+        <!-- Account button -->
+        <button class="action-icon-btn" onclick="app.openAdminModal('orders')" title="Customer Account / Orders">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
+
+        <!-- Cart Bag button with Counter -->
+        <button class="action-icon-btn" onclick="app.openCartDrawer()" title="Shopping Bag" id="headerCartBtn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span class="badge-count cart-badge">0</span>
+        </button>
+
+        <!-- Store Admin Quick Pill -->
+        <button class="btn-admin-pill" onclick="app.openAdminModal('customizer')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>Admin & CMS</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       VIEW 1: HOMEPAGE (Reference Image Match)
+       ========================================================================= -->
+  <main id="homeView">
+    <!-- Hero Banner Section -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <h1 class="hero-title" id="heroTitle">Reveal Your Natural Beauty</h1>
+          <p class="hero-subtitle" id="heroSubtitle">Premium cosmetics crafted with natural ingredients for healthy, glowing skin.</p>
+          <div class="hero-actions">
+            <button class="btn-primary" id="heroBtn" onclick="app.showCatalog('All')">SHOP NOW</button>
+          </div>
+
+          <!-- Feature Highlights under Hero CTA -->
+          <div class="hero-badges-row">
+            <div class="hero-badge-item">
+              <div class="hero-badge-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L8 8a6 6 0 0 0 8 0l-4-6z"/><path d="M12 14v8"/></svg>
+              </div>
+              <span class="hero-badge-text">Natural Ingredients</span>
+            </div>
+            <div class="hero-badge-item">
+              <div class="hero-badge-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17a5 5 0 1 0 10 0c0-2-1.5-3.5-3-4.5 1-1 2-2 2-3.5a4 4 0 0 0-8 0c0 1.5 1 2.5 2 3.5-1.5 1-3 2.5-3 4.5z"/></svg>
+              </div>
+              <span class="hero-badge-text">Cruelty Free</span>
+            </div>
+            <div class="hero-badge-item">
+              <div class="hero-badge-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v4a6 6 0 0 0-6 6v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a6 6 0 0 0-6-6V2"/></svg>
+              </div>
+              <span class="hero-badge-text">Paraben Free</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual Banner Image -->
+        <div class="hero-visual">
+          <div class="hero-image-wrapper">
+            <img src="assets/images/hero-cosmetics.jpg" alt="Lumière Skincare Collection" id="heroImageElement" />
+            <div class="hero-floating-card">
+              <div class="floating-stars">★★★★★</div>
+              <div class="floating-text">
+                <strong>4.9 / 5.0 Rating</strong>
+                <span>Loved by 25,000+ Customers</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trust / Value Proposition Bar -->
+    <section class="trust-bar">
+      <div class="container trust-grid">
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="trust-info">
+            <h4>Natural Ingredients</h4>
+            <p>Carefully selected botanical extracts for your skin.</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+          </div>
+          <div class="trust-info">
+            <h4>Dermatologically Tested</h4>
+            <p>Safe and gentle for all skin types.</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="trust-info">
+            <h4>Premium Quality</h4>
+            <p>High performance formulas for visible results.</p>
+          </div>
+        </div>
+        <div class="trust-item">
+          <div class="trust-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          </div>
+          <div class="trust-info">
+            <h4>Eco-Friendly</h4>
+            <p>Sustainable packaging for a better tomorrow.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Category Grid: "Explore Our Bestsellers" -->
+    <section class="categories-section">
+      <div class="container">
+        <div class="section-header-center">
+          <span class="section-label">SHOP BY CATEGORY</span>
+          <h2 class="section-title">Explore Our Bestsellers</h2>
+        </div>
+
+        <div class="category-grid">
+          <!-- Category 1: Skin Care -->
+          <div class="category-card" onclick="app.showCatalog('Skin Care')">
+            <div class="category-thumb-wrapper">
+              <img src="assets/images/product-serum.jpg" alt="Skin Care Category" />
+            </div>
+            <h3 class="category-title">Skin Care</h3>
+            <span class="category-link">Shop Now →</span>
+          </div>
+          <!-- Category 2: Makeup -->
+          <div class="category-card" onclick="app.showCatalog('Makeup')">
+            <div class="category-thumb-wrapper">
+              <img src="assets/images/hero-cosmetics.jpg" alt="Makeup Category" />
+            </div>
+            <h3 class="category-title">Makeup</h3>
+            <span class="category-link">Shop Now →</span>
+          </div>
+          <!-- Category 3: Hair Care -->
+          <div class="category-card" onclick="app.showCatalog('Hair Care')">
+            <div class="category-thumb-wrapper">
+              <img src="assets/images/product-cleanser.jpg" alt="Hair Care Category" />
+            </div>
+            <h3 class="category-title">Hair Care</h3>
+            <span class="category-link">Shop Now →</span>
+          </div>
+          <!-- Category 4: Fragrance -->
+          <div class="category-card" onclick="app.showCatalog('Fragrance')">
+            <div class="category-thumb-wrapper">
+              <img src="assets/images/product-toner.jpg" alt="Fragrance Category" />
+            </div>
+            <h3 class="category-title">Fragrance</h3>
+            <span class="category-link">Shop Now →</span>
+          </div>
+          <!-- Category 5: Face Masks -->
+          <div class="category-card" onclick="app.showCatalog('Face Masks')">
+            <div class="category-thumb-wrapper">
+              <img src="assets/images/product-cream.jpg" alt="Face Masks Category" />
+            </div>
+            <h3 class="category-title">Face Masks</h3>
+            <span class="category-link">Shop Now →</span>
+          </div>
+          <!-- Category 6: Gift Sets -->
+          <div class="category-card" onclick="app.showCatalog('Gift Sets')">
+            <div class="category-thumb-wrapper">
+              <img src="assets/images/hero-cosmetics.jpg" alt="Gift Sets Category" />
+            </div>
+            <h3 class="category-title">Gift Sets</h3>
+            <span class="category-link">Shop Now →</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand Story Section -->
+    <section class="story-section" id="brandStorySection">
+      <div class="container story-grid">
+        <!-- Story Text Left -->
+        <div class="story-text">
+          <span class="section-label">ABOUT LUMIÈRE</span>
+          <h2 class="section-title">Beauty Inspired by Nature, Perfected by Science</h2>
+          <p>At Lumière, we believe beauty begins with healthy skin. Our products combine the best of nature and advanced skincare science to bring out your natural glow.</p>
+          <button class="btn-primary" onclick="app.showCatalog('All')">LEARN MORE</button>
+        </div>
+
+        <!-- Center Model Image -->
+        <div class="story-image-center">
+          <div class="story-image-wrapper">
+            <img src="assets/images/model-skincare.jpg" alt="Lumière Beauty Model" />
+          </div>
+        </div>
+
+        <!-- Benefits Column Right -->
+        <div class="story-benefits-col">
+          <div class="story-benefit-card">
+            <div class="story-benefit-icon">🌸</div>
+            <div class="story-benefit-info">
+              <h4>Natural & Safe</h4>
+              <p>Gentle botanical formulas formulated for everyday luxurious use.</p>
+            </div>
+          </div>
+          <div class="story-benefit-card">
+            <div class="story-benefit-icon">✨</div>
+            <div class="story-benefit-info">
+              <h4>Visible Results</h4>
+              <p>Clinically proven bioactive ingredients for noticeable rejuvenation.</p>
+            </div>
+          </div>
+          <div class="story-benefit-card">
+            <div class="story-benefit-icon">🌿</div>
+            <div class="story-benefit-info">
+              <h4>For All Skin Types</h4>
+              <p>Thoughtfully pH-balanced and formulated for every beautiful skin tone.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Best Sellers Section ("Our Most Loved Products") -->
+    <section class="products-section">
+      <div class="container">
+        <div class="section-header-flex">
+          <div>
+            <span class="section-label">BEST SELLERS</span>
+            <h2 class="section-title">Our Most Loved Products</h2>
+          </div>
+          <a class="link-all-products" onclick="app.showCatalog('All')">VIEW ALL PRODUCTS →</a>
+        </div>
+
+        <!-- Product Cards Grid -->
+        <div class="products-grid" id="bestsellersGrid">
+          <!-- Populated dynamically by app.renderBestsellers() -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Promise Pink Banner -->
+    <section class="promise-banner">
+      <div class="container">
+        <h3 class="promise-heading">OUR PROMISE</h3>
+        <div class="promise-items-row">
+          <div class="promise-item">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <span>Cruelty Free</span>
+          </div>
+          <div class="promise-item">
+            <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/></svg>
+            <span>Paraben Free</span>
+          </div>
+          <div class="promise-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+            <span>Sulfate Free</span>
+          </div>
+          <div class="promise-item">
+            <svg viewBox="0 0 24 24"><path d="M12 2L8 8a6 6 0 0 0 8 0l-4-6z"/></svg>
+            <span>100% Vegan</span>
+          </div>
+          <div class="promise-item">
+            <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+            <span>Recyclable Packaging</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       VIEW 2: COLLECTION / CATALOG PAGE
+       ========================================================================= -->
+  <main id="catalogView" class="catalog-page" style="display: none;">
+    <div class="container">
+      <div class="catalog-breadcrumbs">
+        <span onclick="app.showHome()">Home</span> / <span onclick="app.showCatalog('All')">Shop</span> / <strong id="catalogBreadcrumbCat">Collection</strong>
+      </div>
+
+      <div class="catalog-banner">
+        <span class="section-label">CURATED COLLECTION</span>
+        <h1 class="section-title" id="catalogCategoryTitle">All Botanical Products</h1>
+        <p style="color: var(--color-text-muted); max-width: 600px;">Formulated with high-potency organic botanical extracts, cold-pressed seed oils, and active antioxidants.</p>
+      </div>
+
+      <div class="catalog-layout">
+        <!-- Filter Sidebar -->
+        <aside class="catalog-sidebar">
+          <div>
+            <h4 class="filter-group-title">Categories</h4>
+            <ul class="filter-list">
+              <li class="filter-option active" data-category="All" onclick="app.showCatalog('All')">All Products</li>
+              <li class="filter-option" data-category="Skin Care" onclick="app.showCatalog('Skin Care')">Skin Care</li>
+              <li class="filter-option" data-category="Makeup" onclick="app.showCatalog('Makeup')">Makeup</li>
+              <li class="filter-option" data-category="Hair Care" onclick="app.showCatalog('Hair Care')">Hair Care</li>
+              <li class="filter-option" data-category="Fragrance" onclick="app.showCatalog('Fragrance')">Fragrance</li>
+              <li class="filter-option" data-category="Face Masks" onclick="app.showCatalog('Face Masks')">Face Masks</li>
+              <li class="filter-option" data-category="Gift Sets" onclick="app.showCatalog('Gift Sets')">Gift Sets</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="filter-group-title">Skin Concern</h4>
+            <ul class="filter-list">
+              <li class="filter-option"><input type="checkbox" checked /> Radiance & Glow</li>
+              <li class="filter-option"><input type="checkbox" /> Deep Hydration</li>
+              <li class="filter-option"><input type="checkbox" /> Anti-Aging & Firming</li>
+              <li class="filter-option"><input type="checkbox" /> Gentle Cleansing</li>
+            </ul>
+          </div>
+        </aside>
+
+        <!-- Main Product Results Area -->
+        <div class="catalog-main">
+          <div class="catalog-toolbar">
+            <span class="catalog-count" id="catalogCount">Showing 8 products</span>
+            <select class="catalog-sort-select" id="catalogSort">
+              <option value="featured">Sort by: Featured</option>
+              <option value="bestsellers">Sort by: Best Selling</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+            </select>
+          </div>
+
+          <div class="products-grid" id="catalogProductsGrid" style="grid-template-columns: repeat(3, 1fr);">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       VIEW 3: PRODUCT DETAIL PAGE (PDP)
+       ========================================================================= -->
+  <main id="pdpView" class="pdp-page" style="display: none;">
+    <div class="container">
+      <div class="catalog-breadcrumbs">
+        <span onclick="app.showHome()">Home</span> / <span onclick="app.showCatalog('All')">Shop</span> / <span id="pdpBreadcrumbCategory" onclick="app.showCatalog('Skin Care')">Skin Care</span> / <strong id="pdpBreadcrumbTitle">Product</strong>
+      </div>
+
+      <div class="pdp-grid">
+        <!-- PDP Images Column -->
+        <div class="pdp-gallery">
+          <div class="pdp-main-image-box">
+            <img id="pdpMainImage" src="assets/images/product-serum.jpg" alt="Product Image" />
+          </div>
+          <div class="pdp-thumbs-row" id="pdpThumbsRow">
+            <!-- Thumbs generated by app.js -->
+          </div>
+        </div>
+
+        <!-- PDP Buy Controls & Details Column -->
+        <div class="pdp-details">
+          <span class="section-label">LUMIÈRE SIGNATURE FORMULA</span>
+          <h1 class="pdp-title" id="pdpTitle">Radiance Facial Serum</h1>
+          <p id="pdpSubtitle" style="font-size: 0.95rem; color: var(--color-primary); font-weight: 500; margin-bottom: 8px;">Illuminate & Rejuvenate with Damask Rose</p>
+
+          <div class="pdp-rating-row">
+            <span>★★★★★</span>
+            <span id="pdpReviewsCount" style="color: var(--color-text-muted); font-size: 0.8rem;">4.9 (128 reviews)</span>
+          </div>
+
+          <div class="pdp-price-row">
+            <span class="pdp-current-price" id="pdpCurrentPrice">$34.99</span>
+            <span class="pdp-compare-price" id="pdpComparePrice">$45.00</span>
+            <span class="pdp-save-badge">SAVE 22%</span>
+          </div>
+
+          <p class="pdp-description" id="pdpDescription">
+            Our award-winning serum combines concentrated Damask rose extract, 10% stabilized Vitamin C, and multi-molecular hyaluronic acid to visibly brighten, smooth texture, and restore youthful luminescence within 14 days.
+          </p>
+
+          <!-- Variant Selector -->
+          <div class="pdp-option-group">
+            <span class="pdp-option-label">Select Volume</span>
+            <div class="pdp-variants-row" id="pdpVariantsRow">
+              <button class="pdp-variant-pill active">30ml / 1.0 fl oz</button>
+              <button class="pdp-variant-pill">50ml / 1.7 fl oz</button>
+              <button class="pdp-variant-pill">100ml / 3.4 fl oz</button>
+            </div>
+          </div>
+
+          <!-- Quantity Stepper & Add to Cart -->
+          <div class="pdp-actions-row">
+            <div class="pdp-qty-stepper">
+              <button class="qty-btn" onclick="app.updatePdpQty(-1)">−</button>
+              <span class="qty-val" id="pdpQtyVal">1</span>
+              <button class="qty-btn" onclick="app.updatePdpQty(1)">+</button>
+            </div>
+            <button class="pdp-btn-add" onclick="app.addCurrentPdpToCart()">Add to Cart</button>
+          </div>
+
+          <!-- Dynamic Express Checkout Button -->
+          <button class="btn-buy-now" onclick="app.addCurrentPdpToCart(); app.openCheckout();">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5z"/></svg>
+            Buy with Shop Pay
+          </button>
+
+          <!-- Value props guarantee -->
+          <div class="pdp-guarantees">
+            <div class="guarantee-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+              <span><strong>Free Standard Delivery</strong> on all orders over $50</span>
+            </div>
+            <div class="guarantee-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span><strong>30-Day Happiness Guarantee:</strong> Love it or return with free shipping</span>
+            </div>
+            <div class="guarantee-item">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span><strong>Clean & Non-Toxic:</strong> 100% cruelty-free, vegan, paraben-free</span>
+            </div>
+          </div>
+
+          <!-- Accordions -->
+          <div class="pdp-accordion">
+            <div class="accordion-item active">
+              <button class="accordion-header">
+                <span>Key Ingredients</span>
+                <span>+</span>
+              </button>
+              <div class="accordion-content" id="pdpIngredients">
+                Organic Damask Rose Hydrosol, 10% Stabilized Vitamin C, Multi-molecular Botanical Hyaluronic Acid, Niacinamide, Camellia Sinensis Leaf Extract.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header">
+                <span>How to Use</span>
+                <span>+</span>
+              </button>
+              <div class="accordion-content" id="pdpHowToUse">
+                Dispense 3-4 drops onto cleansed fingertips. Gently press into face, neck, and décolletage morning and evening before creams.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header">
+                <span>Clinical Results</span>
+                <span>+</span>
+              </button>
+              <div class="accordion-content" id="pdpResults">
+                96% of participants observed significantly brighter skin and improved elasticity in clinical evaluation over 14 days.
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <button class="accordion-header">
+                <span>Shipping & Free Returns</span>
+                <span>+</span>
+              </button>
+              <div class="accordion-content">
+                Orders are processed within 24 hours. Standard shipping takes 3-5 business days. We offer hassle-free 30-day returns on all items.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- =========================================================================
+       FOOTER (Matching Reference Image)
+       ========================================================================= -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <!-- Col 1: Brand Info -->
+      <div class="footer-col">
+        <a class="brand-logo" onclick="app.showHome()" style="margin-bottom: 16px;">
+          <span class="logo-title">LUMIÈRE</span>
+          <span class="logo-subtitle">COSMETICS</span>
+        </a>
+        <p>Empowering your beauty with nature's finest and science's best.</p>
+        <div class="social-links-row">
+          <a class="social-link" href="#" title="Facebook">f</a>
+          <a class="social-link" href="#" title="Instagram">ig</a>
+          <a class="social-link" href="#" title="Twitter">x</a>
+          <a class="social-link" href="#" title="Pinterest">p</a>
+        </div>
+      </div>
+
+      <!-- Col 2: Quick Links -->
+      <div class="footer-col">
+        <h4>QUICK LINKS</h4>
+        <ul class="footer-links-list">
+          <li><a onclick="app.showHome()">Home</a></li>
+          <li><a onclick="app.showCatalog('All')">Shop</a></li>
+          <li><a onclick="document.getElementById('brandStorySection').scrollIntoView({behavior: 'smooth'})">About Us</a></li>
+          <li><a onclick="app.showToast('Blog section is live on your Shopify theme!')">Blog</a></li>
+          <li><a onclick="document.getElementById('footerContact').scrollIntoView({behavior: 'smooth'})">Contact Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Customer Care -->
+      <div class="footer-col">
+        <h4>CUSTOMER CARE</h4>
+        <ul class="footer-links-list">
+          <li><a onclick="app.showToast('Free worldwide shipping on orders over $50')">Shipping Policy</a></li>
+          <li><a onclick="app.showToast('Hassle-free 30-day money-back guarantee')">Return Policy</a></li>
+          <li><a onclick="app.showToast('Terms & Conditions compliant with Shopify Standards')">Terms & Conditions</a></li>
+          <li><a onclick="app.showToast('Privacy Policy is GDPR and CCPA compliant')">Privacy Policy</a></li>
+          <li><a onclick="app.showToast('Frequently Asked Questions')">FAQs</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Let's Connect -->
+      <div class="footer-col" id="footerContact">
+        <h4>LET'S CONNECT</h4>
+        <ul class="contact-info-list">
+          <li class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <span>+1 (800) 123-4567</span>
+          </li>
+          <li class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>hello@lumierecosmetics.com</span>
+          </li>
+          <li class="contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>123 Beauty Street, Los Angeles, CA 90001</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Col 5: Newsletter -->
+      <div class="footer-col">
+        <h4>NEWSLETTER</h4>
+        <p>Subscribe for exclusive offers and beauty tips.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); app.showToast('Thank you for subscribing! 20% discount code: GLOW20', 'success');">
+          <input type="email" placeholder="Enter your email" required class="newsletter-input-box" />
+          <button type="submit" class="btn-subscribe">SUBSCRIBE</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Bottom copyright bar -->
+    <div class="container footer-bottom-row">
+      <span>© 2026 LUMIÈRE COSMETICS. All rights reserved. Powered by Shopify.</span>
+      <div class="payment-icons">
+        <span class="payment-badge">VISA</span>
+        <span class="payment-badge">MASTERCARD</span>
+        <span class="payment-badge">AMEX</span>
+        <span class="payment-badge">PAYPAL</span>
+        <span class="payment-badge">APPLE PAY</span>
+        <span class="payment-badge">SHOP PAY</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       SLIDE-OUT CART DRAWER
+       ========================================================================= -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="if(event.target === this) app.closeCartDrawer()">
+    <div class="cart-drawer">
+      <div class="drawer-header">
+        <h3 class="drawer-title">Your Bag (<span class="cart-badge">0</span>)</h3>
+        <button class="btn-close-drawer" onclick="app.closeCartDrawer()">✕</button>
+      </div>
+
+      <!-- Free shipping meter -->
+      <div class="shipping-meter-box">
+        <div class="shipping-meter-text" id="shippingMeterText">
+          Add $15.01 more for <strong>FREE SHIPPING!</strong>
+        </div>
+        <div class="shipping-progress-bar">
+          <div class="shipping-progress-fill" id="shippingProgressFill"></div>
+        </div>
+      </div>
+
+      <!-- Items List Container -->
+      <div class="drawer-body" id="drawerCartItems">
+        <!-- Populated dynamically by app.updateCartUI() -->
+      </div>
+
+      <!-- Drawer Footer -->
+      <div class="drawer-footer">
+        <!-- Promo code input -->
+        <div class="promo-code-box">
+          <input type="text" id="promoCodeInput" placeholder="Promo code (Try GLOW20)" class="promo-input" />
+          <button class="btn-apply-promo" onclick="app.applyPromoCode()">Apply</button>
+        </div>
+
+        <div class="cart-summary-line">
+          <span>Subtotal</span>
+          <span id="drawerSubtotal">$0.00</span>
+        </div>
+
+        <div class="cart-summary-line" id="drawerDiscountLine" style="display: none; color: var(--color-success);">
+          <span>Promo Discount</span>
+          <span id="drawerDiscountVal">-20%</span>
+        </div>
+
+        <div class="cart-summary-line">
+          <span>Shipping</span>
+          <span style="color: var(--color-success);">Calculated at Checkout</span>
+        </div>
+
+        <div class="cart-summary-total">
+          <span>Total</span>
+          <span id="drawerTotal">$0.00</span>
+        </div>
+
+        <button class="btn-checkout" onclick="app.openCheckout()">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       SIMULATED SHOPIFY ONE-PAGE CHECKOUT MODAL
+       ========================================================================= -->
+  <div class="checkout-modal-overlay" id="checkoutModalOverlay" onclick="if(event.target === this) app.closeCheckout()">
+    <div class="checkout-card">
+      <!-- Left checkout form -->
+      <div class="checkout-main-panel">
+        <div class="checkout-header-logo">LUMIÈRE COSMETICS</div>
+
+        <div class="express-checkout-box">
+          <span style="font-size: 0.75rem; color: #888; text-transform: uppercase; font-weight: 600;">Express Checkout</span>
+          <div class="express-buttons-row">
+            <button class="btn-express btn-express-shoppay" onclick="app.submitOrder()">Shop Pay</button>
+            <button class="btn-express btn-express-paypal" onclick="app.submitOrder()">PayPal</button>
+            <button class="btn-express btn-express-gpay" onclick="app.submitOrder()">GPay</button>
+          </div>
+        </div>
+
+        <div class="divider-or">or continue with details</div>
+
+        <form onsubmit="event.preventDefault(); app.submitOrder();">
+          <div class="form-group-checkout">
+            <label>Contact Email</label>
+            <input type="email" id="checkoutEmail" value="customer@example.com" class="checkout-input" required />
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group-checkout">
+              <label>First Name</label>
+              <input type="text" id="checkoutFirstName" value="Sarah" class="checkout-input" required />
+            </div>
+            <div class="form-group-checkout">
+              <label>Last Name</label>
+              <input type="text" id="checkoutLastName" value="Jenkins" class="checkout-input" required />
+            </div>
+          </div>
+
+          <div class="form-group-checkout">
+            <label>Shipping Address</label>
+            <input type="text" value="742 Evergreen Terrace" class="checkout-input" required />
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group-checkout">
+              <label>City</label>
+              <input type="text" value="Los Angeles" class="checkout-input" required />
+            </div>
+            <div class="form-group-checkout">
+              <label>Postal Code</label>
+              <input type="text" value="90210" class="checkout-input" required />
+            </div>
+          </div>
+
+          <div class="form-group-checkout">
+            <label>Payment Method</label>
+            <div style="border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 12px; background: #FFFDFB;">
+              <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-size: 0.85rem; font-weight: 600;">Credit Card</span>
+                <span style="font-size: 0.75rem; color: #888;">🔒 256-bit encrypted</span>
+              </div>
+              <input type="text" placeholder="Card number" value="•••• •••• •••• 4242" class="checkout-input" style="margin-bottom: 8px;" />
+              <div class="form-row-2">
+                <input type="text" placeholder="MM / YY" value="12/28" class="checkout-input" />
+                <input type="text" placeholder="Security Code" value="789" class="checkout-input" />
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 12px; margin-top: 24px;">
+            <button type="button" class="btn-outline" onclick="app.closeCheckout()">Return to Bag</button>
+            <button type="submit" class="btn-primary" style="flex-grow: 1;">Complete Order</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Right checkout order summary -->
+      <div class="checkout-summary-panel">
+        <h4 style="font-size: 1rem; margin-bottom: 20px; font-weight: 600;">Order Summary</h4>
+        <div id="checkoutSummaryItems">
+          <!-- Populated dynamically -->
+        </div>
+
+        <div style="border-top: 1px solid var(--color-border); padding-top: 16px; margin-top: 16px;">
+          <div class="cart-summary-line">
+            <span>Subtotal</span>
+            <span id="checkoutSubtotal">$0.00</span>
+          </div>
+          <div class="cart-summary-line">
+            <span>Shipping</span>
+            <span style="color: var(--color-success); font-weight: 600;">FREE</span>
+          </div>
+          <div class="cart-summary-line">
+            <span>Taxes</span>
+            <span>$0.00</span>
+          </div>
+          <div class="cart-summary-total">
+            <span>Total to Pay</span>
+            <span id="checkoutTotal">$0.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       ADMIN CMS & LIVE THEME CUSTOMIZER MODAL
+       ========================================================================= -->
+  <div class="admin-modal-overlay" id="adminModalOverlay" onclick="if(event.target === this) app.closeAdminModal()">
+    <div class="admin-window">
+      <!-- Admin Topbar -->
+      <div class="admin-topbar">
+        <div class="admin-topbar-left">
+          <span class="admin-brand-tag">Shopify Admin</span>
+          <strong style="font-size: 1.05rem;">Lumière Store Manager & Customizer</strong>
+        </div>
+        <button style="color: #ffffff; font-size: 1.4rem; padding: 4px;" onclick="app.closeAdminModal()">✕</button>
+      </div>
+
+      <!-- Admin Navigation Tabs -->
+      <div class="admin-tabs-bar">
+        <button class="admin-tab-btn active" data-tab="customizer" onclick="app.switchAdminTab('customizer')">🎨 Live Theme Customizer</button>
+        <button class="admin-tab-btn" data-tab="products" onclick="app.switchAdminTab('products')">📦 Product Catalog Manager</button>
+        <button class="admin-tab-btn" data-tab="orders" onclick="app.switchAdminTab('orders')">📊 Orders & Analytics</button>
+        <button class="admin-tab-btn" data-tab="publish" onclick="app.switchAdminTab('publish')">🚀 Publish to Shopify Live</button>
+      </div>
+
+      <!-- Content Area -->
+      <div class="admin-content-area">
+        <!-- TAB 1: Live Theme Customizer -->
+        <div class="admin-tab-panel active" id="tab-customizer">
+          <div class="admin-card">
+            <div class="admin-card-title">
+              <span>Header & Announcement Customizer</span>
+              <button class="btn-primary" style="padding: 6px 16px; font-size: 0.75rem;" onclick="app.saveCustomizerSettings()">Save to Store</button>
+            </div>
+            <div class="admin-form-grid">
+              <div class="admin-input-group">
+                <label>Top Announcement Bar Text</label>
+                <input type="text" id="customizerAnnouncement" class="admin-input-text" />
+              </div>
+              <div class="admin-input-group">
+                <label>Active Discount Promo Code</label>
+                <input type="text" id="customizerPromoCode" class="admin-input-text" />
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="admin-card-title">
+              <span>Hero Section Live Editor</span>
+            </div>
+            <div class="admin-form-grid">
+              <div class="admin-input-group">
+                <label>Main Headline</label>
+                <input type="text" id="customizerHeroTitle" class="admin-input-text" />
+              </div>
+              <div class="admin-input-group">
+                <label>CTA Button Text</label>
+                <input type="text" id="customizerHeroBtn" class="admin-input-text" />
+              </div>
+              <div class="admin-input-group" style="grid-column: 1 / -1;">
+                <label>Hero Subtitle / Description</label>
+                <textarea id="customizerHeroSubtitle" class="admin-input-text" rows="2"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="admin-card-title">
+              <span>Brand Color Palette & Styling</span>
+            </div>
+            <div class="admin-form-grid">
+              <div class="admin-input-group">
+                <label>Primary Brand Accent Color</label>
+                <input type="color" id="customizerPrimaryColor" style="height: 40px; padding: 2px; width: 100%; border: 1px solid #D1D5DB; border-radius: 6px;" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: Product Catalog Manager -->
+        <div class="admin-tab-panel" id="tab-products">
+          <div class="admin-card">
+            <div class="admin-card-title">Add New Product to Catalog</div>
+            <div class="admin-form-grid">
+              <div class="admin-input-group">
+                <label>Product Title</label>
+                <input type="text" id="newProdTitle" placeholder="e.g. Rose Gold Lip Plumper" class="admin-input-text" />
+              </div>
+              <div class="admin-input-group">
+                <label>Category</label>
+                <select id="newProdCategory" class="admin-input-text">
+                  <option value="Skin Care">Skin Care</option>
+                  <option value="Makeup">Makeup</option>
+                  <option value="Hair Care">Hair Care</option>
+                  <option value="Fragrance">Fragrance</option>
+                  <option value="Face Masks">Face Masks</option>
+                  <option value="Gift Sets">Gift Sets</option>
+                </select>
+              </div>
+              <div class="admin-input-group">
+                <label>Price ($ USD)</label>
+                <input type="number" id="newProdPrice" step="0.01" placeholder="29.99" class="admin-input-text" />
+              </div>
+              <div class="admin-input-group" style="display: flex; flex-direction: row; align-items: center; gap: 8px; margin-top: 24px;">
+                <input type="checkbox" id="newProdBestseller" checked style="width: 18px; height: 18px;" />
+                <label for="newProdBestseller" style="cursor: pointer; margin-bottom: 0;">Show in "Our Most Loved Products" (Bestseller)</label>
+              </div>
+              <div class="admin-input-group" style="grid-column: 1 / -1;">
+                <label>Description</label>
+                <textarea id="newProdDesc" placeholder="Describe product benefits and ritual..." class="admin-input-text" rows="2"></textarea>
+              </div>
+            </div>
+            <button class="btn-primary" style="margin-top: 16px;" onclick="app.addNewProductFromAdmin()">+ Add Product to Store</button>
+          </div>
+
+          <div class="admin-card">
+            <div class="admin-card-title">Current Active Store Products</div>
+            <div class="products-table-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Inventory</th>
+                    <th>Bestseller</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminProductsTableBody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: Orders & Analytics -->
+        <div class="admin-tab-panel" id="tab-orders">
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 24px;">
+            <div class="admin-card" style="margin-bottom: 0;">
+              <span style="font-size: 0.8rem; color: #888; text-transform: uppercase;">Total Store Revenue</span>
+              <h3 style="font-size: 1.8rem; font-weight: 700; color: #2E7D32; margin-top: 6px;" id="statTotalSales">$164.96</h3>
+            </div>
+            <div class="admin-card" style="margin-bottom: 0;">
+              <span style="font-size: 0.8rem; color: #888; text-transform: uppercase;">Total Orders</span>
+              <h3 style="font-size: 1.8rem; font-weight: 700; color: var(--color-primary); margin-top: 6px;" id="statTotalOrders">3</h3>
+            </div>
+            <div class="admin-card" style="margin-bottom: 0;">
+              <span style="font-size: 0.8rem; color: #888; text-transform: uppercase;">Average Order Value</span>
+              <h3 style="font-size: 1.8rem; font-weight: 700; color: var(--color-text-dark); margin-top: 6px;" id="statAvgOrder">$54.98</h3>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <div class="admin-card-title">Recent Customer Orders</div>
+            <div class="products-table-wrapper">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Order #</th>
+                    <th>Customer</th>
+                    <th>Items</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody id="adminOrdersTableBody">
+                  <!-- Populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: Publish to Shopify Live -->
+        <div class="admin-tab-panel" id="tab-publish">
+          <div class="admin-card">
+            <div class="admin-card-title">Export & Upload to Live Shopify Store</div>
+            <p style="color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px;">
+              Your complete Lumière Cosmetics theme and product catalog are packaged into standard Shopify OS 2.0 format. You can upload the theme ZIP directly to your live Shopify online store in seconds!
+            </p>
+
+            <div style="display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap;">
+              <button class="btn-primary" onclick="app.downloadShopifyZip()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download lumiere-shopify-theme.zip
+              </button>
+              <button class="btn-secondary" onclick="app.downloadProductCSV()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                Download shopify-products-import.csv
+              </button>
+            </div>
+
+            <div style="background: var(--color-blush-pale); padding: 24px; border-radius: var(--radius-md); border: 1px solid var(--color-border);">
+              <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 12px; color: var(--color-text-dark);">
+                📖 How to Publish Live on Shopify (3 Steps):
+              </h4>
+              <ol style="padding-left: 20px; font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.8;">
+                <li><strong>Log in to Shopify:</strong> Go to your Shopify admin panel (e.g. <code>https://admin.shopify.com/store/your-store-name</code>).</li>
+                <li><strong>Upload Theme:</strong> In the left sidebar, navigate to <strong>Online Store → Themes</strong>. Under "Theme library", click <strong>Add theme → Upload zip file</strong>, select <code>lumiere-shopify-theme.zip</code>, and click <strong>Publish</strong>.</li>
+                <li><strong>Import Products:</strong> Go to <strong>Products → Import</strong> in the Shopify sidebar, upload <code>shopify-products-import.csv</code>, and click <strong>Import Products</strong>. All your images, descriptions, prices, and tags are live immediately!</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Store Admin Trigger -->
+  <button class="floating-admin-btn" onclick="app.openAdminModal('customizer')">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    <span>Store Admin & Customizer</span>
+  </button>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Main JavaScript App -->
+  <script src="app.js"></script>
+</body>
+</html>

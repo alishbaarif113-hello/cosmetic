@@ -1,0 +1,69 @@
+{
+  "sections": {
+    "hero_banner": {
+      "type": "hero-banner",
+      "settings": {
+        "heading": "Reveal Your Natural Beauty",
+        "subheading": "Premium cosmetics crafted with natural ingredients for healthy, glowing skin.",
+        "button_label": "SHOP NOW"
+      }
+    },
+    "trust_badges": {
+      "type": "trust-badges",
+      "settings": {
+        "badge1_title": "Natural Ingredients",
+        "badge1_desc": "Carefully selected botanical extracts for your skin.",
+        "badge2_title": "Dermatologically Tested",
+        "badge2_desc": "Safe and gentle for all skin types.",
+        "badge3_title": "Premium Quality",
+        "badge3_desc": "High performance formulas for visible results.",
+        "badge4_title": "Eco-Friendly",
+        "badge4_desc": "Sustainable packaging for a better tomorrow."
+      }
+    },
+    "category_grid": {
+      "type": "category-grid",
+      "settings": {
+        "subheading": "SHOP BY CATEGORY",
+        "heading": "Explore Our Bestsellers"
+      }
+    },
+    "brand_story": {
+      "type": "brand-story",
+      "settings": {
+        "subheading": "ABOUT LUMIÈRE",
+        "heading": "Beauty Inspired by Nature, Perfected by Science",
+        "text": "At Lumière, we believe beauty begins with healthy skin. Our products combine the best of nature and advanced skincare science to bring out your natural glow.",
+        "btn_text": "LEARN MORE"
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "subheading": "BEST SELLERS",
+        "heading": "Our Most Loved Products",
+        "products_to_show": 5,
+        "show_view_all": true
+      }
+    },
+    "promise_banner": {
+      "type": "promise-banner",
+      "settings": {
+        "heading": "OUR PROMISE",
+        "item1": "Cruelty Free",
+        "item2": "Paraben Free",
+        "item3": "Sulfate Free",
+        "item4": "Vegan",
+        "item5": "Recyclable Packaging"
+      }
+    }
+  },
+  "order": [
+    "hero_banner",
+    "trust_badges",
+    "category_grid",
+    "brand_story",
+    "featured_collection",
+    "promise_banner"
+  ]
+}

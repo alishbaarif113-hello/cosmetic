@@ -1,0 +1,71 @@
+<section class="story-section" id="brandStorySection">
+  <div class="container story-grid">
+    <div class="story-text">
+      <span class="section-label">{{ section.settings.subheading | default: 'ABOUT LUMIÈRE' }}</span>
+      <h2 class="section-title">{{ section.settings.heading | default: 'Beauty Inspired by Nature, Perfected by Science' }}</h2>
+      <p>{{ section.settings.text | default: 'At Lumière, we believe beauty begins with healthy skin. Our products combine the best of nature and advanced skincare science to bring out your natural glow.' }}</p>
+      {%- if section.settings.btn_text != blank -%}
+        <a href="{{ section.settings.btn_link | default: '/pages/about' }}" class="btn-primary">{{ section.settings.btn_text }}</a>
+      {%- endif -%}
+    </div>
+
+    <div class="story-image-center">
+      <div class="story-image-wrapper">
+        {%- if section.settings.image != blank -%}
+          <img src="{{ section.settings.image | image_url: width: 600 }}" alt="{{ section.settings.heading }}" />
+        {%- else -%}
+          <img src="{{ 'model-skincare.jpg' | asset_url }}" alt="Lumière Skincare Model" />
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="story-benefits-col">
+      <div class="story-benefit-card">
+        <div class="story-benefit-icon">🌸</div>
+        <div class="story-benefit-info">
+          <h4>{{ section.settings.b1_title | default: 'Natural & Safe' }}</h4>
+          <p>{{ section.settings.b1_desc | default: 'Gentle formulas for everyday use.' }}</p>
+        </div>
+      </div>
+      <div class="story-benefit-card">
+        <div class="story-benefit-icon">✨</div>
+        <div class="story-benefit-info">
+          <h4>{{ section.settings.b2_title | default: 'Visible Results' }}</h4>
+          <p>{{ section.settings.b2_desc | default: 'Clinically proven for real results.' }}</p>
+        </div>
+      </div>
+      <div class="story-benefit-card">
+        <div class="story-benefit-icon">🌿</div>
+        <div class="story-benefit-info">
+          <h4>{{ section.settings.b3_title | default: 'For All Skin Types' }}</h4>
+          <p>{{ section.settings.b3_desc | default: 'Made for every beautiful you.' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand Story",
+  "settings": [
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "ABOUT LUMIÈRE" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Beauty Inspired by Nature, Perfected by Science" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "At Lumière, we believe beauty begins with healthy skin. Our products combine the best of nature and advanced skincare science to bring out your natural glow." },
+    { "type": "text", "id": "btn_text", "label": "Button Text", "default": "LEARN MORE" },
+    { "type": "url", "id": "btn_link", "label": "Button Link" },
+    { "type": "image_picker", "id": "image", "label": "Model Image" },
+    { "type": "text", "id": "b1_title", "label": "Benefit 1 Title", "default": "Natural & Safe" },
+    { "type": "text", "id": "b1_desc", "label": "Benefit 1 Description", "default": "Gentle formulas for everyday use." },
+    { "type": "text", "id": "b2_title", "label": "Benefit 2 Title", "default": "Visible Results" },
+    { "type": "text", "id": "b2_desc", "label": "Benefit 2 Description", "default": "Clinically proven for real results." },
+    { "type": "text", "id": "b3_title", "label": "Benefit 3 Title", "default": "For All Skin Types" },
+    { "type": "text", "id": "b3_desc", "label": "Benefit 3 Description", "default": "Made for every beautiful you." }
+  ],
+  "presets": [
+    {
+      "name": "Brand Story"
+    }
+  ]
+}
+{% endschema %}

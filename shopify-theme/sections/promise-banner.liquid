@@ -1,0 +1,47 @@
+<section class="promise-banner" style="background: {{ section.settings.bg_color }};">
+  <div class="container">
+    <h3 class="promise-heading">{{ section.settings.heading | default: 'OUR PROMISE' }}</h3>
+    <div class="promise-items-row">
+      <div class="promise-item">
+        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <span>{{ section.settings.item1 | default: 'Cruelty Free' }}</span>
+      </div>
+      <div class="promise-item">
+        <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/></svg>
+        <span>{{ section.settings.item2 | default: 'Paraben Free' }}</span>
+      </div>
+      <div class="promise-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+        <span>{{ section.settings.item3 | default: 'Sulfate Free' }}</span>
+      </div>
+      <div class="promise-item">
+        <svg viewBox="0 0 24 24"><path d="M12 2L8 8a6 6 0 0 0 8 0l-4-6z"/></svg>
+        <span>{{ section.settings.item4 | default: 'Vegan' }}</span>
+      </div>
+      <div class="promise-item">
+        <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+        <span>{{ section.settings.item5 | default: 'Recyclable Packaging' }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Our Promise Banner",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#C87D70" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "OUR PROMISE" },
+    { "type": "text", "id": "item1", "label": "Item 1", "default": "Cruelty Free" },
+    { "type": "text", "id": "item2", "label": "Item 2", "default": "Paraben Free" },
+    { "type": "text", "id": "item3", "label": "Item 3", "default": "Sulfate Free" },
+    { "type": "text", "id": "item4", "label": "Item 4", "default": "Vegan" },
+    { "type": "text", "id": "item5", "label": "Item 5", "default": "Recyclable Packaging" }
+  ],
+  "presets": [
+    {
+      "name": "Our Promise Banner"
+    }
+  ]
+}
+{% endschema %}

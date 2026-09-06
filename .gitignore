@@ -1,0 +1,9 @@
+# Environment & Temporary files
+.DS_Store
+Thumbs.db
+*.log
+scratch/
+.system_generated/
+
+# Local preview server
+server.ps1

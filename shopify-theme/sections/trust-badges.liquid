@@ -1,0 +1,64 @@
+<section class="trust-bar">
+  <div class="container trust-grid">
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="trust-info">
+        <h4>{{ section.settings.badge1_title | default: 'Natural Ingredients' }}</h4>
+        <p>{{ section.settings.badge1_desc | default: 'Carefully selected botanical extracts for your skin.' }}</p>
+      </div>
+    </div>
+
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+      </div>
+      <div class="trust-info">
+        <h4>{{ section.settings.badge2_title | default: 'Dermatologically Tested' }}</h4>
+        <p>{{ section.settings.badge2_desc | default: 'Safe and gentle for all skin types.' }}</p>
+      </div>
+    </div>
+
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div class="trust-info">
+        <h4>{{ section.settings.badge3_title | default: 'Premium Quality' }}</h4>
+        <p>{{ section.settings.badge3_desc | default: 'High performance formulas for visible results.' }}</p>
+      </div>
+    </div>
+
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+      </div>
+      <div class="trust-info">
+        <h4>{{ section.settings.badge4_title | default: 'Eco-Friendly' }}</h4>
+        <p>{{ section.settings.badge4_desc | default: 'Sustainable packaging for a better tomorrow.' }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust Badges Bar",
+  "settings": [
+    { "type": "text", "id": "badge1_title", "label": "Badge 1 Title", "default": "Natural Ingredients" },
+    { "type": "text", "id": "badge1_desc", "label": "Badge 1 Description", "default": "Carefully selected botanical extracts for your skin." },
+    { "type": "text", "id": "badge2_title", "label": "Badge 2 Title", "default": "Dermatologically Tested" },
+    { "type": "text", "id": "badge2_desc", "label": "Badge 2 Description", "default": "Safe and gentle for all skin types." },
+    { "type": "text", "id": "badge3_title", "label": "Badge 3 Title", "default": "Premium Quality" },
+    { "type": "text", "id": "badge3_desc", "label": "Badge 3 Description", "default": "High performance formulas for visible results." },
+    { "type": "text", "id": "badge4_title", "label": "Badge 4 Title", "default": "Eco-Friendly" },
+    { "type": "text", "id": "badge4_desc", "label": "Badge 4 Description", "default": "Sustainable packaging for a better tomorrow." }
+  ],
+  "presets": [
+    {
+      "name": "Trust Badges Bar"
+    }
+  ]
+}
+{% endschema %}

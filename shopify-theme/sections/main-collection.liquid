@@ -1,0 +1,47 @@
+<div class="container catalog-page">
+  <div class="catalog-breadcrumbs">
+    <a href="{{ routes.root_url }}">Home</a> / <a href="{{ routes.all_products_collection_url }}">Shop</a> / <strong>{{ collection.title }}</strong>
+  </div>
+
+  <div class="catalog-banner">
+    <span class="section-label">CURATED COLLECTION</span>
+    <h1 class="section-title">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <p style="color: var(--color-text-muted); max-width: 600px;">{{ collection.description }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="catalog-layout">
+    <aside class="catalog-sidebar">
+      <div>
+        <h4 class="filter-group-title">Collections</h4>
+        <ul class="filter-list">
+          {%- for coll in collections -%}
+            <li><a href="{{ coll.url }}" class="filter-option {% if coll.id == collection.id %}active{% endif %}">{{ coll.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    </aside>
+
+    <div class="catalog-main">
+      <div class="catalog-toolbar">
+        <span class="catalog-count">Showing {{ collection.products_count }} products</span>
+      </div>
+
+      <div class="products-grid" style="grid-template-columns: repeat(3, 1fr);">
+        {%- for product in collection.products -%}
+          {% render 'product-card', product: product %}
+        {%- else -%}
+          <p style="grid-column: 1/-1; text-align: center; padding: 40px;">No products found in this collection.</p>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection Page",
+  "settings": []
+}
+{% endschema %}

@@ -1,0 +1,85 @@
+<div class="container pdp-page">
+  <div class="catalog-breadcrumbs">
+    <a href="{{ routes.root_url }}">Home</a> / <a href="{{ routes.all_products_collection_url }}">Shop</a> / <strong>{{ product.title }}</strong>
+  </div>
+
+  <div class="pdp-grid">
+    <div class="pdp-gallery">
+      <div class="pdp-main-image-box">
+        <img id="ProductMainImage" src="{{ product.featured_image | image_url: width: 800 }}" alt="{{ product.title | escape }}">
+      </div>
+      <div class="pdp-thumbs-row">
+        {%- for image in product.images -%}
+          <div class="pdp-thumb-item {% if forloop.first %}active{% endif %}" onclick="document.getElementById('ProductMainImage').src='{{ image | image_url: width: 800 }}'">
+            <img src="{{ image | image_url: width: 150 }}" alt="{{ product.title | escape }}">
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="pdp-details">
+      <span class="section-label">{{ product.vendor | default: 'LUMIÈRE' }}</span>
+      <h1 class="pdp-title">{{ product.title }}</h1>
+
+      <div class="pdp-price-row">
+        <span class="pdp-current-price">{{ product.price | money }}</span>
+        {%- if product.compare_at_price > product.price -%}
+          <span class="pdp-compare-price">{{ product.compare_at_price | money }}</span>
+          <span class="pdp-save-badge">SAVE {{ product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round }}%</span>
+        {%- endif -%}
+      </div>
+
+      <div class="pdp-description">
+        {{ product.description }}
+      </div>
+
+      {%- form 'product', product, id: 'product-form' -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+        {%- unless product.has_only_default_variant -%}
+          <div class="pdp-option-group">
+            <span class="pdp-option-label">Options</span>
+            <div class="pdp-variants-row">
+              {%- for variant in product.variants -%}
+                <label class="pdp-variant-pill {% if forloop.first %}active{% endif %}" style="display: inline-flex; align-items: center; cursor: pointer;">
+                  <input type="radio" name="id" value="{{ variant.id }}" {% if forloop.first %}checked{% endif %} style="display: none;" onchange="this.parentElement.parentElement.querySelectorAll('.pdp-variant-pill').forEach(el=>el.classList.remove('active')); this.parentElement.classList.add('active');">
+                  {{ variant.title }}
+                </label>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endunless -%}
+
+        <div class="pdp-actions-row">
+          <button type="submit" name="add" class="pdp-btn-add" {% unless product.available %}disabled{% endunless %}>
+            {%- if product.available -%}
+              Add to Cart
+            {%- else -%}
+              Sold Out
+            {%- endif -%}
+          </button>
+        </div>
+
+        {{ form | payment_button }}
+      {%- endform -%}
+
+      <div class="pdp-guarantees">
+        <div class="guarantee-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <span><strong>Free Standard Delivery</strong> on all orders over $50</span>
+        </div>
+        <div class="guarantee-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span><strong>30-Day Happiness Guarantee:</strong> Love it or return with free shipping</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product Information",
+  "settings": []
+}
+{% endschema %}
