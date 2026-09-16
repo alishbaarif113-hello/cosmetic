@@ -1,0 +1,17 @@
+<div class="container" style="max-width: 1200px; margin: 60px auto; padding: 0 20px;">
+  <h1 style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2.5rem; margin-bottom: 24px; text-align: center;">Search Results</h1>
+  {% if search.performed %}
+    <p style="text-align: center; margin-bottom: 40px; color: #666;">
+      {{ search.results_count }} results found for "{{ search.terms | escape }}"
+    </p>
+    <div class="product-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px;">
+      {% for item in search.results %}
+        {% if item.object_type == 'product' %}
+          {% render 'product-card', product: item %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <p style="text-align: center; color: #666;">Use the search bar above to find products.</p>
+  {% endif %}
+</div>
